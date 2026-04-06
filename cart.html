@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decoria - Cart</title>
+    <link rel="icon" href="images/decoria-icon.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="JS/cart.js" defer></script>
+    <script src="JS/app.js" defer></script>
+    <script src="JS/products.js" defer></script>
+    <script src="JS/cart-page.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="upper-header">
+            <div></div>
+            <div>
+                <img src="images/ticket-percent.svg" alt="">
+                <p>30% off storewide — Limited time!</p>
+                <a href="">Shop Now <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+            <button id="close-publicity-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="mobile-header">
+            <div>
+                <button id="menu-btn"><i class="fa-solid fa-bars"></i></button>
+                <a href="index.html"><img src="images/decoria-logo.png" alt="" class="logo"></a>
+            </div>
+            <div class="mobile-header-icons">
+                <div class="bag-icon-header">
+                    <button class="bag-btn"><img src="images/bag-icon.svg" alt=""></button>
+                    <span class="cart-articlesNr">0</span>
+                </div>
+                <div class="bag-icon-header">
+                    <button class="wishlist-btn"><img src="images/wishlist.svg" alt=""></button>
+                    <span class="wishlist-articlesNr">0</span>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-burger-menu">
+            <div class="top-burg-menu">
+                <div>
+                    <img src="images/decoria-logo.png" alt="Decoria logo">
+                    <button id="close-burger-menu"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="input">
+                    <img src="images/search02.svg" alt="search icon">
+                    <input type="text" placeholder="Search" id="burger-input" autocomplete="off">
+                </div>
+                <div class="search-results burger-search-results" id="burger-search-results"></div>
+                <nav>
+                    <a href="index.html">Home</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="shop.html" data-nav-product>Product</a>
+                    <a href="contact.html">Contact Us</a>
+                </nav>
+            </div>
+            <div class="bottom-burg-menu">
+                <div>
+                    <h2>Cart</h2>
+                    <div>
+                        <img src="images/bag-icon.svg" alt="bag icon">
+                        <span class="cart-articlesNr">0</span>
+                    </div>
+                </div>
+                <div>
+                    <h2>Wishlist</h2>
+                    <div>
+                        <img src="images/wishlist.svg" alt="heart icon">
+                        <span class="wishlist-articlesNr">0</span>
+                    </div>
+                </div>
+                <button class="mobile-signin-btn">Sign In</button>
+                <div>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="desktop-header">
+            <div>
+                <a href="index.html"><img src="images/decoria-logo.png" alt="" class="logo"></a>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                    <a href="shop.html" data-nav-product>Product</a>
+                <a href="contact.html">Contact Us</a>
+            </nav>
+            <div class="search-bar-wrap" id="search-bar-wrap" style="display:none">
+                <div class="search-bar-inner">
+                    <i class="fa-solid fa-magnifying-glass search-bar-icon"></i>
+                    <input type="text" id="search-bar-input" placeholder="Search products..." autocomplete="off">
+                    <button id="search-bar-close"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="search-results" id="search-results"></div>
+            </div>
+            <div class="desktop-header-btns">
+                <button id="search-btn"><img src="images/search02.svg" alt=""></button>
+                <button id="profile-btn"><img src="images/user-circle.svg" alt=""></button>
+                <div class="bag-icon-header">
+                    <button class="bag-btn"><img src="images/bag-icon.svg" alt=""></button>
+                    <span class="cart-articlesNr">0</span>
+                </div>
+                <div class="bag-icon-header">
+                    <button class="wishlist-btn"><img src="images/wishlist.svg" alt=""></button>
+                    <span class="wishlist-articlesNr">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="cart-page-main">
+        <div class="cart-overlay"></div>
+        <div class="cart-window">
+            <div class="cart-header">
+                <h2>Cart</h2>
+                <button id="cart-clear-all">Clear All</button>
+                <button id="close-cart-window"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div>
+                <div id="products-section"></div>
+                <div id="cart-window-totals">
+                    <p>Subtotal: <span id="cart-subtotal">$0.00</span></p>
+                    <h3>Total: <span id="cart-total">$0.00</span></h3>
+                    <div>
+                        <button id="checkout-btn" onclick="window.location.href='checkout.html'">Checkout</button>
+                        <button id="view-cart-btn" onclick="window.location.href='cart.html'">View Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wishlist Window -->
+        <div class="wishlist-overlay"></div>
+        <div class="wishlist-window">
+            <div class="cart-header">
+                <h2>Wishlist</h2>
+                <button id="wishlist-clear-all">Clear All</button>
+                <button id="close-wishlist-window"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div>
+                <div id="wishlist-products-section"></div>
+            </div>
+        </div>
+
+        <h1 class="cart-page-title">Cart</h1>
+
+        <!-- Checkout Steps -->
+        <div class="checkout-steps">
+            <div class="step active">
+                <span class="step-circle active">1</span>
+                <span class="step-label">Shopping cart</span>
+            </div>
+            <div class="step-line"></div>
+            <div class="step">
+                <span class="step-circle">2</span>
+                <span class="step-label">Checkout details</span>
+            </div>
+            <div class="step-line"></div>
+            <div class="step">
+                <span class="step-circle">3</span>
+                <span class="step-label">Order complete</span>
+            </div>
+        </div>
+
+        <div class="cart-page-layout">
+            <!-- Cart Table -->
+            <div class="cart-table-wrap">
+                <div class="cart-table-header">
+                    <span>Product</span>
+                    <span>Quantity</span>
+                    <span>Price</span>
+                    <span>Subtotal</span>
+                    <span></span>
+                </div>
+                <div id="cart-page-items"></div>
+
+                <!-- Coupon -->
+                <div class="coupon-section">
+                    <h4>Have a coupon?</h4>
+                    <p>Add your code for an instant cart discount</p>
+                    <div class="coupon-input-row">
+                        <div class="coupon-input-wrap">
+                            <i class="fa-solid fa-tag"></i>
+                            <input type="text" id="coupon-input" placeholder="Coupon Code">
+                        </div>
+                        <button id="coupon-apply-btn">Apply</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cart Summary -->
+            <div class="cart-summary-box">
+                <h3>Cart summary</h3>
+                <div class="shipping-options">
+                    <label class="shipping-option">
+                        <input type="radio" name="shipping" value="free" checked>
+                        <span>Free shipping</span>
+                        <span class="shipping-price">$0.00</span>
+                    </label>
+                    <label class="shipping-option">
+                        <input type="radio" name="shipping" value="express">
+                        <span>Express shipping</span>
+                        <span class="shipping-price">+$15.00</span>
+                    </label>
+                    <label class="shipping-option">
+                        <input type="radio" name="shipping" value="pickup">
+                        <span>Pick Up</span>
+                        <span class="shipping-price">Free</span>
+                    </label>
+                </div>
+                <div class="cart-summary-row">
+                    <span>Subtotal</span>
+                    <span id="cart-page-subtotal">$0.00</span>
+                </div>
+                <div class="cart-summary-row total">
+                    <span>Total</span>
+                    <span id="cart-page-total">$0.00</span>
+                </div>
+                <a href="checkout.html" class="checkout-page-btn">Checkout</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="top-footer">
+                <div class="left-top-footer">
+                    <img src="images/decoria-logo.png" alt="Decoria logo" class="footer-logo-img">
+                    <div class="footer-divider"></div>
+                    <p class="footer-tagline">Gift & Decoration Store</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="index.html">Home</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="shop.html" data-nav-product>Product</a>
+ <a href="#">Blog</a>
+                    <a href="contact.html">Contact Us</a>
+                </nav>
+            </div>
+            <div class="footer-line"></div>
+            <div class="bottom-footer">
+                <div class="left-bottom-footer">
+                    <span>Copyright © 2024 VisioCreate. All rights reserved</span>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+                <div class="right-bottom-footer">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decoria - Evererything for your Home</title>
+    <link rel="icon" href="images/decoria-icon.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="JS/cart.js" defer></script>
+    <script src="JS/app.js" defer></script>
+    <script src="JS/products.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header>
+        <div class="upper-header">
+            <div></div>
+            <div>
+                <img src="images/ticket-percent.svg" alt="">
+                <p>30% off storewide — Limited time!</p>
+                <a href="shop.html">Shop Now <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+            <button id="close-publicity-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="mobile-header">
+            <div>
+                <button id="menu-btn"><i class="fa-solid fa-bars"></i></button>
+                <a href="index.html"><img src="images/decoria-logo.png" alt="" class="logo"></a>
+            </div>
+            <div class="mobile-header-icons">
+                <div class="bag-icon-header">
+                    <button class="bag-btn"><img src="images/bag-icon.svg" alt=""></button>
+                    <span class="cart-articlesNr">0</span>
+                </div>
+                <div class="bag-icon-header">
+                    <button class="wishlist-btn"><img src="images/wishlist.svg" alt=""></button>
+                    <span class="wishlist-articlesNr">0</span>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-burger-menu">
+            <div class="top-burg-menu">
+                <div>
+                    <img src="images/decoria-logo.png" alt="Decoria logo">
+                    <button id="close-burger-menu"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="input">
+                    <img src="images/search02.svg" alt="search icon">
+                    <input type="text" placeholder="Search" id="burger-input" autocomplete="off">
+                </div>
+                <div class="search-results burger-search-results" id="burger-search-results"></div>
+                <nav>
+                    <a href="index.html" class="accent">Home</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="shop.html" data-nav-product>Product</a>
+                    <a href="contact.html">Contact Us</a>
+                </nav>
+            </div>
+            <div class="bottom-burg-menu">
+                <div>
+                    <h2>Cart</h2>
+                    <div>
+                        <img src="images/bag-icon.svg" alt="bag icon">
+                        <span class="cart-articlesNr">0</span>
+                    </div>
+                </div>
+                <div>
+                    <h2>Wishlist</h2>
+                    <div>
+                        <img src="images/wishlist.svg" alt="heart icon">
+                        <span class="wishlist-articlesNr">0</span>
+                    </div>
+                </div>
+                <button class="mobile-signin-btn">Sign In</button>
+                <div>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="desktop-header">
+            <div>
+                <a href="index.html"> <img src="images/decoria-logo.png" alt="" class="logo"></a>
+            </div>
+            <nav>
+                <a href="index.html" class="accent">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="shop.html" data-nav-product>Product</a>
+                <a href="contact.html">Contact Us</a>
+            </nav>
+            <div class="search-bar-wrap" id="search-bar-wrap" style="display:none">
+                <div class="search-bar-inner">
+                    <i class="fa-solid fa-magnifying-glass search-bar-icon"></i>
+                    <input type="text" id="search-bar-input" placeholder="Search products..." autocomplete="off">
+                    <button id="search-bar-close"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="search-results" id="search-results"></div>
+            </div>
+            <div class="desktop-header-btns">
+                <button id="search-btn"><img src="images/search02.svg" alt=""></button>
+                <button id="profile-btn"><img src="images/user-circle.svg" alt=""></button>
+                <div class="bag-icon-header">
+                    <button class="bag-btn"><img src="images/bag-icon.svg" alt=""></button>
+                    <span class="cart-articlesNr">0</span>
+                </div>
+                <div class="bag-icon-header">
+                    <button class="wishlist-btn"><img src="images/wishlist.svg" alt=""></button>
+                    <span class="wishlist-articlesNr">0</span>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <main>
+        <div class="cart-overlay"></div>
+        <div class="cart-window">
+            <div class="cart-header">
+                <h2>Cart</h2>
+                <button id="cart-clear-all">Clear All</button>
+                <button id="close-cart-window"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div>
+                <div id="products-section"></div>
+                <div id="cart-window-totals">
+                    <p>Subtotal: <span id="cart-subtotal">$0.00</span></p>
+                    <h3>Total: <span id="cart-total">$0.00</span></h3>
+                    <div>
+                        <button id="checkout-btn" onclick="window.location.href='checkout.html'">Checkout</button>
+                        <button id="view-cart-btn" onclick="window.location.href='cart.html'">View Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Wishlist Window -->
+        <div class="wishlist-overlay"></div>
+        <div class="wishlist-window">
+            <div class="cart-header">
+                <h2>Wishlist</h2>
+                <button id="wishlist-clear-all">Clear All</button>
+                <button id="close-wishlist-window"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div>
+                <div id="wishlist-products-section"></div>
+            </div>
+        </div>
+
+    <section class="hero-section">
+            <img src="images/hero-img.svg" alt="">
+            <div>
+                <h1>Transform Your Space, Elevate Your Life</h1>
+                <p><strong>Decoria</strong> is a gift & decorations store based in HCMC, Vietnam. Est since 2019</p>
+            </div>
+        </section>
+
+        <section class="banner-grid">
+            <div class="div1">
+                <img src="images/living-room-banner-img.svg" alt="">
+                <div>
+                    <h3>Living Room</h3>
+                    <a href="shop.html?category=Living%20Room" class="more-products">Shop now <i class="fa-solid fa-arrow-right-long"></i></a>
+                </div>
+            </div>
+            <div class="div2">
+                <img src="images/bedroom-banner-img.svg" alt="">
+                <div>
+                    <h3>Bedroom</h3>
+                    <a href="shop.html?category=Bedroom" class="more-products">Shop now <i class="fa-solid fa-arrow-right-long"></i></a>
+                </div>
+            </div>
+            <div class="div3">
+                <img src="images/kitchen-banner-img.svg" alt="">
+                <div>
+                    <h3>Kitchen</h3>
+                    <a href="shop.html?category=Kitchen" class="more-products">Shop now <i class="fa-solid fa-arrow-right-long"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="product-carousel">
+            <div class="carousel-top">
+                <h2>New <br>Arrivals</h2>
+                <a href="shop.html" class="more-products">More Products <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+            <div class="cards"></div>
+        </section>
+
+        <section class="values">
+            <div class="value-card">
+                <img src="images/free-delivery.svg" alt="Free delivery icon">
+                <div class="value-card-info">
+                    <h3 class="h3-design">Free Shipping</h3>
+                    <p>Order above $200</p>
+                </div>
+            </div>
+            <div class="value-card">
+                <img src="images/money.svg" alt="Money icon">
+                <div class="value-card-info">
+                    <h3 class="h3-design">Money back</h3>
+                    <p>30 days guarantee</p>
+                </div>
+            </div>
+            <div class="value-card">
+                <img src="images/lock01.svg" alt="Lock icon">
+                <div class="value-card-info">
+                    <h3 class="h3-design">Secure Payment</h3>
+                    <p>Secured by Stripe</p>
+                </div>
+            </div>
+            <div class="value-card">
+                <img src="images/free-delivery.svg" alt="Free delivery icon">
+                <div class="value-card-info">
+                    <h3>24/7 Support</h3>
+                    <p>Phone and Email support</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="banner">
+            <img src="images/banner-img.svg" alt="Modern living room with brown sofa, round table and decorative plants">
+            <div>
+                <span>SALE UP TO 35% OFF</span>
+                <h2>HUNDREDS of <br> New lower prices!</h2>
+                <p>It’s more affordable than ever to give every room in your home a stylish makeover</p>
+                <a href="shop.html?sort=new&price=lower-price" class="more-products">Shop now <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+        </section>
+
+        <section class="blog-section">
+            <div>
+                <h2>Articles</h2>
+                <a href="#" class="more-products">More Articles <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+            <div class="blog-card">
+                <img src="images/home-decore-blog.svg" alt="Living room decorated with a gray sofa, bookshelf and wall gallery">
+                <div>
+                    <h3 class="h3-design">7 ways to decore your home</h3>
+                    <a href="#" class="more-products">Read More <i class="fa-solid fa-arrow-right-long"></i></a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="images/kitchen-blog.svg" alt="Modern kitchen with wooden island and high bar stools">
+                <div>
+                    <h3 class="h3-design">Kitchen organization</h3>
+                    <a href="#" class="more-products">Read More <i class="fa-solid fa-arrow-right-long"></i></a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="images/bedroom-blog.svg" alt="Cozy bedroom with white bedding, plants and natural light">
+                <div>
+                    <h3 class="h3-design">Decore your bedroom</h3>
+                    <a href="#" class="more-products">Read More <i class="fa-solid fa-arrow-right-long"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter">
+            <img src="images/newsletter-img1.svg" alt="">
+            <div class="newsletter-content">
+                <div class="info-letter">
+                    <h2>Join Our Newsletter</h2>
+                    <p>Sign up for deals, new products and promotions</p>
+                </div>
+                <div class="emailinput">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="email" id="emailInput" placeholder="Email address">
+                    <button id="newsletter-sent-email">Signup</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="top-footer">
+                <div class="left-top-footer">
+                    <img src="images/decoria-logo.png" alt="Decoria logo" class="footer-logo-img">
+                    <div class="footer-divider"></div>
+                    <p class="footer-tagline">Gift & Decoration Store</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="index.html" class="active">Home</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="shop.html" data-nav-product>Product</a>
+                    <a href="#">Blog</a>
+                    <a href="contact.html">Contact Us</a>
+                </nav>
+            </div>
+
+            <div class="footer-line"></div>
+
+            <div class="bottom-footer">
+                <div class="left-bottom-footer">
+                    <span>Copyright © 2024 VisioCreate. All rights reserved</span>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+                <div class="right-bottom-footer">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
