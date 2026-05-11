@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decoria - Shop</title>
+    <link rel="icon" href="images/decoria-icon.png">
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="JS/supabase-client.js" defer></script>
+    <script src="JS/cart.js" defer></script>
+    <script src="JS/app.js" defer></script>
+    <script src="JS/products.js" defer></script>
+    <script src="JS/shop.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="upper-header">
+            <div></div>
+            <div>
+                <img src="images/ticket-percent.svg" alt="">
+                <p>30% off storewide — Limited time!</p>
+                <a href="">Shop Now <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+            <button id="close-publicity-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="mobile-header">
+            <div>
+                <button id="menu-btn"><i class="fa-solid fa-bars"></i></button>
+                <a href="index.html"><img src="images/decoria-logo.png" alt="" class="logo"></a>
+            </div>
+            <div class="mobile-header-icons">
+                <div class="bag-icon-header">
+                    <button class="bag-btn"><img src="images/bag-icon.svg" alt=""></button>
+                    <span class="cart-articlesNr">0</span>
+                </div>
+                <div class="bag-icon-header">
+                    <button class="wishlist-btn"><img src="images/wishlist.svg" alt=""></button>
+                    <span class="wishlist-articlesNr">0</span>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-burger-menu">
+            <div class="top-burg-menu">
+                <div>
+                    <img src="images/decoria-logo.png" alt="Decoria logo">
+                    <button id="close-burger-menu"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="input">
+                    <img src="images/search02.svg" alt="search icon">
+                    <input type="text" placeholder="Search" id="burger-input" autocomplete="off">
+                </div>
+                <div class="search-results burger-search-results" id="burger-search-results"></div>
+                <nav>
+                    <a href="index.html">Home</a>
+                    <a href="shop.html" class="accent">Shop</a>
+                    <a href="shop.html" data-nav-product>Product</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact Us</a>
+                </nav>
+            </div>
+            <div class="bottom-burg-menu">
+                <div>
+                    <h2>Cart</h2>
+                    <div>
+                        <img src="images/bag-icon.svg" alt="bag icon">
+                        <span class="cart-articlesNr">0</span>
+                    </div>
+                </div>
+                <div>
+                    <h2>Wishlist</h2>
+                    <div>
+                        <img src="images/wishlist.svg" alt="heart icon">
+                        <span class="wishlist-articlesNr">0</span>
+                    </div>
+                </div>
+                <button class="mobile-signin-btn">Sign In</button>
+                <button class="mobile-logout-btn" style="display:none">Log Out</button>
+                <div>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="desktop-header">
+            <div>
+                <a href="index.html"><img src="images/decoria-logo.png" alt="" class="logo"></a>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="shop.html" class="accent">Shop</a>
+                <a href="shop.html" data-nav-product>Product</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact Us</a>
+            </nav>
+            <div class="search-bar-wrap" id="search-bar-wrap" style="display:none">
+                <div class="search-bar-inner">
+                    <i class="fa-solid fa-magnifying-glass search-bar-icon"></i>
+                    <input type="text" id="search-bar-input" placeholder="Search products..." autocomplete="off">
+                    <button id="search-bar-close"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="search-results" id="search-results"></div>
+            </div>
+            <div class="desktop-header-btns">
+                <button id="search-btn"><img src="images/search02.svg" alt=""></button>
+                <button id="profile-btn"><img src="images/user-circle.svg" alt=""></button>
+                <div class="bag-icon-header">
+                    <button class="bag-btn"><img src="images/bag-icon.svg" alt=""></button>
+                    <span class="cart-articlesNr">0</span>
+                </div>
+                <div class="bag-icon-header">
+                    <button class="wishlist-btn"><img src="images/wishlist.svg" alt=""></button>
+                    <span class="wishlist-articlesNr">0</span>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <main>
+        <div class="cart-overlay"></div>
+        <div class="cart-window">
+            <div class="cart-header">
+                <h2>Cart</h2>
+                <button id="cart-clear-all">Clear All</button>
+                <button id="close-cart-window"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div>
+                <div id="products-section"></div>
+                <div id="cart-window-totals">
+                    <p>Subtotal: <span id="cart-subtotal">$0.00</span></p>
+                    <h3>Total: <span id="cart-total">$0.00</span></h3>
+                    <div>
+                        <button id="checkout-btn" onclick="window.location.href='checkout.html'">Checkout</button>
+                        <button id="view-cart-btn" onclick="window.location.href='cart.html'">View Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Wishlist Window -->
+        <div class="wishlist-overlay"></div>
+        <div class="wishlist-window">
+            <div class="cart-header">
+                <h2>Wishlist</h2>
+                <button id="wishlist-clear-all">Clear All</button>
+                <button id="close-wishlist-window"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div>
+                <div id="wishlist-products-section"></div>
+            </div>
+        </div>
+
+    <!-- Hero Banner -->
+        <section class="shop-hero">
+            <img src="images/shop-page-main-image.svg" alt="Shop banner" class="shop-hero-img">
+            <div class="shop-hero-overlay">
+                <div class="shop-hero-breadcrumb">
+                    <a href="index.html">Home</a>
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <span>Shop</span>
+                </div>
+                <h1>Shop Page</h1>
+                <p>Let's design the place you always imagined.</p>
+            </div>
+        </section>
+
+        <!-- Shop Layout -->
+        <section class="shop-layout">
+            <!-- Sidebar Filters -->
+            <aside class="shop-sidebar">
+                <div class="sidebar-section">
+                    <h4 class="sidebar-title">CATEGORIES</h4>
+                    <ul class="category-list" id="category-list">
+                        <li><button class="category-btn active" data-category="all">All Rooms</button></li>
+                        <li><button class="category-btn" data-category="Living Room">Living Room</button></li>
+                        <li><button class="category-btn" data-category="Bedroom">Bedroom</button></li>
+                        <li><button class="category-btn" data-category="Kitchen">Kitchen</button></li>
+                        <li><button class="category-btn" data-category="Bathroom">Bathroom</button></li>
+                        <li><button class="category-btn" data-category="Outdoor">Outdoor</button></li>
+                    </ul>
+                </div>
+                <div class="sidebar-divider"></div>
+                <div class="sidebar-section">
+                    <h4 class="sidebar-title">PRICE</h4>
+                    <ul class="price-list">
+                        <li><button class="price-btn active" data-min="0" data-max="999999">All Price</button></li>
+                        <li><button class="price-btn" data-min="0" data-max="50">$0.00 - $50.00</button></li>
+                        <li><button class="price-btn" data-min="50" data-max="100">$50.00 - $100.00</button></li>
+                        <li><button class="price-btn" data-min="100" data-max="200">$100.00 - $200.00</button></li>
+                        <li><button class="price-btn" data-min="200" data-max="999999">$200.00+</button></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Products Area -->
+            <div class="shop-products-area">
+                <div class="shop-toolbar">
+                    <!-- Filter dropdowns (all screen sizes) -->
+                    <div class="mobile-filters-wrap">
+                        <div class="filter-group">
+                            <span class="filter-label">CATEGORIES</span>
+                            <div class="custom-dropdown" id="category-dropdown">
+                                <div class="dropdown-trigger">
+                                    <span class="dropdown-selected">All Rooms</span>
+                                    <i class="fa-solid fa-chevron-down dropdown-chevron"></i>
+                                </div>
+                                <ul class="dropdown-list">
+                                    <li class="dropdown-item active" data-value="all">All Rooms</li>
+                                    <li class="dropdown-item" data-value="Living Room">Living Room</li>
+                                    <li class="dropdown-item" data-value="Bedroom">Bedroom</li>
+                                    <li class="dropdown-item" data-value="Kitchen">Kitchen</li>
+                                    <li class="dropdown-item" data-value="Bathroom">Bathroom</li>
+                                    <li class="dropdown-item" data-value="Outdoor">Outdoor</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="filter-group">
+                            <span class="filter-label">PRICE</span>
+                            <div class="custom-dropdown" id="price-dropdown">
+                                <div class="dropdown-trigger">
+                                    <span class="dropdown-selected">All Price</span>
+                                    <i class="fa-solid fa-chevron-down dropdown-chevron"></i>
+                                </div>
+                                <ul class="dropdown-list">
+                                    <li class="dropdown-item active" data-value="0,999999">All Price</li>
+                                    <li class="dropdown-item" data-value="0,50">$0.00 – $50.00</li>
+                                    <li class="dropdown-item" data-value="50,100">$50.00 – $100.00</li>
+                                    <li class="dropdown-item" data-value="100,200">$100.00 – $200.00</li>
+                                    <li class="dropdown-item" data-value="200,999999">$200.00+</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sort (always visible) -->
+                    <div class="shop-sort">
+                        <label>Sort by</label>
+                        <div class="custom-dropdown dropdown-align-right" id="sort-dropdown">
+                            <div class="dropdown-trigger">
+                                <span class="dropdown-selected">Default</span>
+                                <i class="fa-solid fa-chevron-down dropdown-chevron"></i>
+                            </div>
+                            <ul class="dropdown-list">
+                                <li class="dropdown-item active" data-value="default">Default</li>
+                                <li class="dropdown-item" data-value="price-asc">Price: Low to High</li>
+                                <li class="dropdown-item" data-value="price-desc">Price: High to Low</li>
+                                <li class="dropdown-item" data-value="name-asc">Name: A–Z</li>
+                                <li class="dropdown-item" data-value="new">New Arrivals</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Desktop view buttons (>1024px) -->
+                    <div class="shop-view-btns desktop-view-btns">
+                        <button class="view-btn active" id="grid-4-btn" title="4 columns"><i class="fa-solid fa-grip"></i></button>
+                        <button class="view-btn" id="grid-3-btn" title="3 columns"><i class="fa-solid fa-table-cells-large"></i></button>
+                        <button class="view-btn" id="grid-2-btn" title="2 columns with details"><i class="fa-solid fa-table-list"></i></button>
+                    </div>
+
+                    <!-- Tablet view buttons (≤1024px, >767px) -->
+                    <div class="shop-view-btns tablet-view-btns">
+                        <button class="view-btn" id="tablet-grid-3-btn" title="3 columns"><i class="fa-solid fa-table-cells-large"></i></button>
+                        <button class="view-btn active" id="tablet-grid-2-btn" title="2 columns"><i class="fa-solid fa-table-list"></i></button>
+                    </div>
+
+                    <!-- Phone view buttons (≤767px) -->
+                    <div class="shop-view-btns phone-view-btns">
+                        <button class="view-btn active" id="phone-grid-2-btn" title="2 columns"><i class="fa-solid fa-grip"></i></button>
+                        <button class="view-btn" id="phone-grid-1-btn" title="1 column"><i class="fa-solid fa-list"></i></button>
+                    </div>
+                </div>
+                <div class="cards shop-grid" id="shop-cards"></div>
+                <div class="shop-show-more">
+                    <button id="show-more-btn">Show More</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter">
+            <img src="images/newsletter-img1.svg" alt="">
+            <div class="newsletter-content">
+                <div class="info-letter">
+                    <h2>Join Our Newsletter</h2>
+                    <p>Sign up for deals, new products and promotions</p>
+                </div>
+                <div class="emailinput">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="email" id="emailInput" placeholder="Email address">
+                    <button id="newsletter-sent-email">Signup</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="top-footer">
+                <div class="left-top-footer">
+                    <img src="images/decoria-logo.png" alt="Decoria logo" class="footer-logo-img">
+                    <div class="footer-divider"></div>
+                    <p class="footer-tagline">Gift & Decoration Store</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="index.html">Home</a>
+                    <a href="shop.html" class="active">Shop</a>
+                    <a href="shop.html" data-nav-product>Product</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact Us</a>
+                </nav>
+            </div>
+            <div class="footer-line"></div>
+            <div class="bottom-footer">
+                <div class="left-bottom-footer">
+                    <span>Copyright © 2024 VisioCreate. All rights reserved</span>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+                <div class="right-bottom-footer">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

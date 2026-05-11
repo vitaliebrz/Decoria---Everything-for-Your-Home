@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decoria - Product</title>
+    <link rel="icon" href="images/decoria-icon.png">
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="JS/supabase-client.js" defer></script>
+    <script src="JS/cart.js" defer></script>
+    <script src="JS/app.js" defer></script>
+    <script src="JS/products.js" defer></script>
+    <script src="JS/product-page.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="upper-header">
+            <div></div>
+            <div>
+                <img src="images/ticket-percent.svg" alt="">
+                <p>30% off storewide — Limited time!</p>
+                <a href="">Shop Now <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+            <button id="close-publicity-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="mobile-header">
+            <div>
+                <button id="menu-btn"><i class="fa-solid fa-bars"></i></button>
+                <a href="index.html"><img src="images/decoria-logo.png" alt="" class="logo"></a>
+            </div>
+            <div class="mobile-header-icons">
+                <div class="bag-icon-header">
+                    <button class="bag-btn"><img src="images/bag-icon.svg" alt=""></button>
+                    <span class="cart-articlesNr">0</span>
+                </div>
+                <div class="bag-icon-header">
+                    <button class="wishlist-btn"><img src="images/wishlist.svg" alt=""></button>
+                    <span class="wishlist-articlesNr">0</span>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-burger-menu">
+            <div class="top-burg-menu">
+                <div>
+                    <img src="images/decoria-logo.png" alt="Decoria logo">
+                    <button id="close-burger-menu"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="input">
+                    <img src="images/search02.svg" alt="search icon">
+                    <input type="text" placeholder="Search" id="burger-input" autocomplete="off">
+                </div>
+                <div class="search-results burger-search-results" id="burger-search-results"></div>
+                <nav>
+                    <a href="index.html">Home</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="shop.html" class="accent" data-nav-product>Product</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact Us</a>
+                </nav>
+            </div>
+            <div class="bottom-burg-menu">
+                <div>
+                    <h2>Cart</h2>
+                    <div>
+                        <img src="images/bag-icon.svg" alt="bag icon">
+                        <span class="cart-articlesNr">0</span>
+                    </div>
+                </div>
+                <div>
+                    <h2>Wishlist</h2>
+                    <div>
+                        <img src="images/wishlist.svg" alt="heart icon">
+                        <span class="wishlist-articlesNr">0</span>
+                    </div>
+                </div>
+                <button class="mobile-signin-btn">Sign In</button>
+                <button class="mobile-logout-btn" style="display:none">Log Out</button>
+                <div>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="desktop-header">
+            <div>
+                <a href="index.html"><img src="images/decoria-logo.png" alt="" class="logo"></a>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="product.html" class="accent">Product</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact Us</a>
+            </nav>
+            <div class="search-bar-wrap" id="search-bar-wrap" style="display:none">
+                <div class="search-bar-inner">
+                    <i class="fa-solid fa-magnifying-glass search-bar-icon"></i>
+                    <input type="text" id="search-bar-input" placeholder="Search products..." autocomplete="off">
+                    <button id="search-bar-close"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="search-results" id="search-results"></div>
+            </div>
+            <div class="desktop-header-btns">
+                <button id="search-btn"><img src="images/search02.svg" alt=""></button>
+                <button id="profile-btn"><img src="images/user-circle.svg" alt=""></button>
+                <div class="bag-icon-header">
+                    <button class="bag-btn"><img src="images/bag-icon.svg" alt=""></button>
+                    <span class="cart-articlesNr">0</span>
+                </div>
+                <div class="bag-icon-header">
+                    <button class="wishlist-btn"><img src="images/wishlist.svg" alt=""></button>
+                    <span class="wishlist-articlesNr">0</span>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <main>
+        <div class="cart-overlay"></div>
+        <div class="cart-window">
+            <div class="cart-header">
+                <h2>Cart</h2>
+                <button id="cart-clear-all">Clear All</button>
+                <button id="close-cart-window"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div>
+                <div id="products-section"></div>
+                <div id="cart-window-totals">
+                    <p>Subtotal: <span id="cart-subtotal">$0.00</span></p>
+                    <h3>Total: <span id="cart-total">$0.00</span></h3>
+                    <div>
+                        <button id="checkout-btn" onclick="window.location.href='checkout.html'">Checkout</button>
+                        <button id="view-cart-btn" onclick="window.location.href='cart.html'">View Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wishlist Window -->
+        <div class="wishlist-overlay"></div>
+        <div class="wishlist-window">
+            <div class="cart-header">
+                <h2>Wishlist</h2>
+                <button id="wishlist-clear-all">Clear All</button>
+                <button id="close-wishlist-window"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div>
+                <div id="wishlist-products-section"></div>
+            </div>
+        </div>
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-bar">
+            <span><a href="index.html">Home</a> <i class="fa-solid fa-chevron-right"></i> <a href="shop.html">Shop</a> <i class="fa-solid fa-chevron-right"></i> <span>Product</span> <i class="fa-solid fa-chevron-right"></i> <span id="product-breadcrumb">Product</span></span>
+        </div>
+
+        <!-- Product Detail -->
+        <section class="product-detail-section">
+            <div class="product-gallery">
+                <div class="gallery-main">
+                    <img id="gallery-main-img" src="" alt="Product image">
+                    <span class="badge" id="product-badge" style="display:none">NEW</span>
+                    <button class="gallery-nav-btn gallery-prev" id="gallery-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="gallery-nav-btn gallery-next" id="gallery-next"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div class="gallery-thumbnails" id="gallery-thumbs"></div>
+            </div>
+
+            <div class="product-info">
+                <div class="product-rating-row">
+                    <div class="product-rating" id="product-rating"></div>
+                    <span class="product-rating-score" id="product-rating-score"></span>
+                    <span class="product-reviews" id="product-reviews"></span>
+                </div>
+                <h1 id="product-name">Product Name</h1>
+                <div class="product-price-detail">
+                    <span class="final-price" id="product-final-price">$0.00</span>
+                    <span class="old-price-detail" id="product-old-price"></span>
+                    <span class="discount-badge" id="product-discount"></span>
+                </div>
+                <p class="product-description" id="product-description"></p>
+                <p class="product-category">Category: <span id="product-category"></span></p>
+
+                <div class="offer-countdown" id="offer-countdown" style="display:none">
+                    <span class="offer-countdown-label">Offer expires in:</span>
+                    <div class="countdown-timer">
+                        <div class="countdown-unit"><span id="cd-days">00</span><small>days</small></div>
+                        <div class="countdown-unit"><span id="cd-hours">00</span><small>hours</small></div>
+                        <div class="countdown-unit"><span id="cd-min">00</span><small>min</small></div>
+                        <div class="countdown-unit"><span id="cd-sec">00</span><small>sec</small></div>
+                    </div>
+                </div>
+
+                <div class="product-sizes-section" id="product-sizes-section" style="display:none">
+                    <span class="sizes-label">Measurements</span>
+                    <div class="size-options" id="size-options"></div>
+                </div>
+
+                <div class="product-color-section" id="product-color-section" style="display:none">
+                    <span class="color-section-label">Choose Color</span>
+                    <div class="color-select-wrapper custom-dropdown" id="product-color-dropdown">
+                        <div class="dropdown-trigger">
+                            <span class="dropdown-selected">Select Color</span>
+                            <i class="fa-solid fa-chevron-down dropdown-chevron"></i>
+                        </div>
+                        <ul class="dropdown-list" id="product-color-list"></ul>
+                    </div>
+                </div>
+
+                <div class="product-quantity-section">
+                    <div class="product-quantity" id="product-quantity-controls" style="display:none">
+                        <button class="minus" id="detail-minus"><i class="fa-solid fa-trash"></i></button>
+                        <span id="detail-qty">1</span>
+                        <button class="plus" id="detail-plus"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <button class="wishlist-detail-btn" id="detail-wishlist">
+                        <i class="fa-regular fa-heart"></i> Wishlist
+                    </button>
+                </div>
+                <button class="add-to-cart-detail" id="detail-add-to-cart">Add to Cart</button>
+
+                <div class="product-share">
+                    <span>Share:</span>
+                    <button class="share-native-btn" id="share-native-btn" title="Share" style="display:none"><i class="fa-solid fa-share-nodes"></i></button>
+                    <a href="#" data-share="facebook" target="_blank" rel="noopener noreferrer" title="Share on Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" data-share="whatsapp" target="_blank" rel="noopener noreferrer" title="Share on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#" data-share="pinterest" target="_blank" rel="noopener noreferrer" title="Share on Pinterest"><i class="fa-brands fa-pinterest"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabs: Description / Reviews / You might also like -->
+        <section class="product-tabs-section">
+            <div class="product-tabs">
+                <button class="tab-btn active" data-tab="related">You might also like</button>
+                <button class="tab-btn" data-tab="description">Description</button>
+                <button class="tab-btn" data-tab="reviews">Reviews</button>
+            </div>
+            <div class="tab-content active" id="tab-related">
+                <div class="cards related-carousel" id="related-products"></div>
+            </div>
+            <div class="tab-content" id="tab-description">
+                <p id="tab-desc-text"></p>
+            </div>
+            <div class="tab-content" id="tab-reviews">
+                <div class="reviews-summary">
+                    <div class="reviews-score">
+                        <span class="big-score" id="reviews-big-score">5.0</span>
+                        <div class="stars-row" id="reviews-stars"></div>
+                        <span id="reviews-count">0 Reviews</span>
+                    </div>
+                </div>
+
+                <!-- Add review form -->
+                <div class="add-review-form">
+                    <h4>Leave a Review</h4>
+                    <div class="review-star-select" id="review-star-select">
+                        <i class="fa-regular fa-star" data-val="1"></i>
+                        <i class="fa-regular fa-star" data-val="2"></i>
+                        <i class="fa-regular fa-star" data-val="3"></i>
+                        <i class="fa-regular fa-star" data-val="4"></i>
+                        <i class="fa-regular fa-star" data-val="5"></i>
+                    </div>
+                    <input type="text" id="review-name" placeholder="Your name" class="review-input">
+                    <textarea id="review-text" placeholder="Write your review..." class="review-textarea" rows="4"></textarea>
+                    <button id="submit-review-btn">Submit Review</button>
+                </div>
+
+                <div class="reviews-list" id="reviews-list"></div>
+                <div class="reviews-load-more-wrap" id="reviews-load-more-wrap" style="display:none">
+                    <button id="reviews-load-more">Load More</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter">
+            <img src="images/newsletter-img1.svg" alt="">
+            <div class="newsletter-content">
+                <div class="info-letter">
+                    <h2>Join Our Newsletter</h2>
+                    <p>Sign up for deals, new products and promotions</p>
+                </div>
+                <div class="emailinput">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="email" id="emailInput" placeholder="Email address">
+                    <button id="newsletter-sent-email">Signup</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="top-footer">
+                <div class="left-top-footer">
+                    <img src="images/decoria-logo.png" alt="Decoria logo" class="footer-logo-img">
+                    <div class="footer-divider"></div>
+                    <p class="footer-tagline">Gift & Decoration Store</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="index.html">Home</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="shop.html" class="active" data-nav-product>Product</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact Us</a>
+                </nav>
+            </div>
+            <div class="footer-line"></div>
+            <div class="bottom-footer">
+                <div class="left-bottom-footer">
+                    <span>Copyright © 2024 VisioCreate. All rights reserved</span>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+                <div class="right-bottom-footer">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

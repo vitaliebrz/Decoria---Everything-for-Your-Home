@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decoria - Blog</title>
+    <link rel="icon" href="images/decoria-icon.png">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="JS/supabase-client.js" defer></script>
+    <script src="JS/cart.js" defer></script>
+    <script src="JS/app.js" defer></script>
+    <script src="JS/products.js" defer></script>
+    <script src="JS/blog-data.js" defer></script>
+    <script src="JS/blog.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="upper-header">
+            <div></div>
+            <div>
+                <img src="images/ticket-percent.svg" alt="">
+                <p>30% off storewide — Limited time!</p>
+                <a href="shop.html">Shop Now <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+            <button id="close-publicity-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="mobile-header">
+            <div>
+                <button id="menu-btn"><i class="fa-solid fa-bars"></i></button>
+                <a href="index.html"><img src="images/decoria-logo.png" alt="" class="logo"></a>
+            </div>
+            <div class="mobile-header-icons">
+                <div class="bag-icon-header">
+                    <button class="bag-btn"><img src="images/bag-icon.svg" alt=""></button>
+                    <span class="cart-articlesNr">0</span>
+                </div>
+                <div class="bag-icon-header">
+                    <button class="wishlist-btn"><img src="images/wishlist.svg" alt=""></button>
+                    <span class="wishlist-articlesNr">0</span>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-burger-menu">
+            <div class="top-burg-menu">
+                <div>
+                    <img src="images/decoria-logo.png" alt="Decoria logo">
+                    <button id="close-burger-menu"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="input">
+                    <img src="images/search02.svg" alt="search icon">
+                    <input type="text" placeholder="Search" id="burger-input" autocomplete="off">
+                </div>
+                <div class="search-results burger-search-results" id="burger-search-results"></div>
+                <nav>
+                    <a href="index.html">Home</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="shop.html" data-nav-product>Product</a>
+                    <a href="blog.html" class="accent">Blog</a>
+                    <a href="contact.html">Contact Us</a>
+                </nav>
+            </div>
+            <div class="bottom-burg-menu">
+                <div>
+                    <h2>Cart</h2>
+                    <div>
+                        <img src="images/bag-icon.svg" alt="bag icon">
+                        <span class="cart-articlesNr">0</span>
+                    </div>
+                </div>
+                <div>
+                    <h2>Wishlist</h2>
+                    <div>
+                        <img src="images/wishlist.svg" alt="heart icon">
+                        <span class="wishlist-articlesNr">0</span>
+                    </div>
+                </div>
+                <button class="mobile-signin-btn">Sign In</button>
+                <button class="mobile-logout-btn" style="display:none">Log Out</button>
+                <div>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="desktop-header">
+            <div>
+                <a href="index.html"><img src="images/decoria-logo.png" alt="" class="logo"></a>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="shop.html" data-nav-product>Product</a>
+                <a href="blog.html" class="accent">Blog</a>
+                <a href="contact.html">Contact Us</a>
+            </nav>
+            <div class="search-bar-wrap" id="search-bar-wrap" style="display:none">
+                <div class="search-bar-inner">
+                    <i class="fa-solid fa-magnifying-glass search-bar-icon"></i>
+                    <input type="text" id="search-bar-input" placeholder="Search products..." autocomplete="off">
+                    <button id="search-bar-close"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="search-results" id="search-results"></div>
+            </div>
+            <div class="desktop-header-btns">
+                <button id="search-btn"><img src="images/search02.svg" alt=""></button>
+                <button id="profile-btn"><img src="images/user-circle.svg" alt=""></button>
+                <div class="bag-icon-header">
+                    <button class="bag-btn"><img src="images/bag-icon.svg" alt=""></button>
+                    <span class="cart-articlesNr">0</span>
+                </div>
+                <div class="bag-icon-header">
+                    <button class="wishlist-btn"><img src="images/wishlist.svg" alt=""></button>
+                    <span class="wishlist-articlesNr">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="cart-overlay"></div>
+        <div class="cart-window">
+            <div class="cart-header">
+                <h2>Cart</h2>
+                <button id="cart-clear-all">Clear All</button>
+                <button id="close-cart-window"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div>
+                <div id="products-section"></div>
+                <div id="cart-window-totals">
+                    <p>Subtotal: <span id="cart-subtotal">$0.00</span></p>
+                    <h3>Total: <span id="cart-total">$0.00</span></h3>
+                    <div>
+                        <button id="checkout-btn" onclick="window.location.href='checkout.html'">Checkout</button>
+                        <button id="view-cart-btn" onclick="window.location.href='cart.html'">View Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wishlist-overlay"></div>
+        <div class="wishlist-window">
+            <div class="cart-header">
+                <h2>Wishlist</h2>
+                <button id="wishlist-clear-all">Clear All</button>
+                <button id="close-wishlist-window"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div>
+                <div id="wishlist-products-section"></div>
+            </div>
+        </div>
+
+        <!-- Hero Banner -->
+        <section class="blog-hero">
+            <img src="images/blogpage.svg" alt="Blog banner" class="blog-hero-img">
+            <div class="blog-hero-overlay">
+                <div class="blog-hero-breadcrumb">
+                    <a href="index.html">Home</a>
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <span>Blog</span>
+                </div>
+                <h1>Our Blog</h1>
+                <p>Inspiration, tips and ideas for your home.</p>
+            </div>
+        </section>
+
+        <!-- Blog Layout -->
+        <section class="blog-layout">
+            <!-- Sidebar -->
+            <aside class="blog-sidebar">
+                <div class="sidebar-section">
+                    <h4 class="sidebar-title">RECENT POSTS</h4>
+                    <div class="blog-recent-list" id="blog-recent-list"></div>
+                </div>
+                <div class="sidebar-divider"></div>
+                <div class="sidebar-section">
+                    <h4 class="sidebar-title">FEATURED</h4>
+                    <div class="blog-featured-widget" id="blog-featured-widget"></div>
+                </div>
+            </aside>
+
+            <!-- Blog Content Area -->
+            <div class="blog-content-area">
+                <div class="blog-toolbar">
+                    <!-- Category + Sort dropdowns (same line, same style) -->
+                    <div class="mobile-filters-wrap blog-filters-wrap">
+                        <div class="filter-group">
+                            <span class="filter-label">CATEGORY</span>
+                            <div class="custom-dropdown" id="blog-category-dropdown">
+                                <div class="dropdown-trigger">
+                                    <span class="dropdown-selected">All Posts</span>
+                                    <i class="fa-solid fa-chevron-down dropdown-chevron"></i>
+                                </div>
+                                <ul class="dropdown-list">
+                                    <li class="dropdown-item active" data-value="all">All Posts</li>
+                                    <li class="dropdown-item" data-value="Decoration">Decoration</li>
+                                    <li class="dropdown-item" data-value="Organization">Organization</li>
+                                    <li class="dropdown-item" data-value="Trends">Trends</li>
+                                    <li class="dropdown-item" data-value="DIY">DIY</li>
+                                    <li class="dropdown-item" data-value="Guides">Guides</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="filter-group">
+                            <span class="filter-label">SORT BY</span>
+                            <div class="custom-dropdown" id="blog-sort-dropdown">
+                                <div class="dropdown-trigger">
+                                    <span class="dropdown-selected">Newest</span>
+                                    <i class="fa-solid fa-chevron-down dropdown-chevron"></i>
+                                </div>
+                                <ul class="dropdown-list">
+                                    <li class="dropdown-item active" data-value="newest">Newest</li>
+                                    <li class="dropdown-item" data-value="oldest">Oldest</li>
+                                    <li class="dropdown-item" data-value="read-time-asc">Shortest Read</li>
+                                    <li class="dropdown-item" data-value="read-time-desc">Longest Read</li>
+                                    <li class="dropdown-item" data-value="az">Title: A–Z</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Desktop view buttons -->
+                    <div class="shop-view-btns desktop-view-btns">
+                        <button class="view-btn active" id="blog-grid-3-btn" title="3 columns"><i class="fa-solid fa-grip"></i></button>
+                        <button class="view-btn" id="blog-grid-2-btn" title="2 columns"><i class="fa-solid fa-table-cells-large"></i></button>
+                        <button class="view-btn" id="blog-list-btn" title="List view"><i class="fa-solid fa-table-list"></i></button>
+                    </div>
+
+                    <!-- Tablet view buttons -->
+                    <div class="shop-view-btns tablet-view-btns">
+                        <button class="view-btn active" id="blog-tablet-2-btn" title="2 columns"><i class="fa-solid fa-table-cells-large"></i></button>
+                        <button class="view-btn" id="blog-tablet-1-btn" title="1 column"><i class="fa-solid fa-list"></i></button>
+                    </div>
+
+                </div>
+
+                <!-- Blog Cards -->
+                <div class="blog-grid blog-grid-3" id="blog-cards"></div>
+
+                <!-- Show More -->
+                <div class="shop-show-more">
+                    <button id="blog-show-more-btn">Show More</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter">
+            <img src="images/newsletter-img1.svg" alt="">
+            <div class="newsletter-content">
+                <div class="info-letter">
+                    <h2>Join Our Newsletter</h2>
+                    <p>Sign up for deals, new products and promotions</p>
+                </div>
+                <div class="emailinput">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="email" id="emailInput" placeholder="Email address">
+                    <button id="newsletter-sent-email">Signup</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="top-footer">
+                <div class="left-top-footer">
+                    <img src="images/decoria-logo.png" alt="Decoria logo" class="footer-logo-img">
+                    <div class="footer-divider"></div>
+                    <p class="footer-tagline">Gift & Decoration Store</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="index.html">Home</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="shop.html" data-nav-product>Product</a>
+                    <a href="blog.html" class="active">Blog</a>
+                    <a href="contact.html">Contact Us</a>
+                </nav>
+            </div>
+            <div class="footer-line"></div>
+            <div class="bottom-footer">
+                <div class="left-bottom-footer">
+                    <span>Copyright © 2024 VisioCreate. All rights reserved</span>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+                <div class="right-bottom-footer">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

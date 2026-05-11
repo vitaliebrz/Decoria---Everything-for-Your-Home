@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decoria - Order Complete</title>
+    <link rel="icon" href="images/decoria-icon.png">
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="JS/supabase-client.js" defer></script>
+    <script src="JS/cart.js" defer></script>
+    <script src="JS/app.js" defer></script>
+    <script src="JS/products.js" defer></script>
+    <script src="JS/order-complete.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="upper-header" style="display:none"></div>
+        <div class="desktop-header">
+            <div>
+                <a href="index.html"><img src="images/decoria-logo.png" alt="" class="logo"></a>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="shop.html" data-nav-product>Product</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact Us</a>
+            </nav>
+            <div class="search-bar-wrap" id="search-bar-wrap" style="display:none">
+                <div class="search-bar-inner">
+                    <i class="fa-solid fa-magnifying-glass search-bar-icon"></i>
+                    <input type="text" id="search-bar-input" placeholder="Search products..." autocomplete="off">
+                    <button id="search-bar-close"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="search-results" id="search-results"></div>
+            </div>
+            <div class="desktop-header-btns">
+                <button id="search-btn"><img src="images/search02.svg" alt=""></button>
+                <button id="profile-btn"><img src="images/user-circle.svg" alt=""></button>
+                <div class="bag-icon-header">
+                    <a href="cart.html"><img src="images/bag-icon.svg" alt=""></a>
+                    <span class="cart-articlesNr">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-header">
+            <div>
+                <button id="menu-btn"><i class="fa-solid fa-bars"></i></button>
+                <a href="index.html"><img src="images/decoria-logo.png" alt="" class="logo"></a>
+            </div>
+            <div class="bag-icon-header">
+                <a href="cart.html"><img src="images/bag-icon.svg" alt=""></a>
+                <span class="cart-articlesNr">0</span>
+            </div>
+        <div id="mobile-burger-menu">
+            <div class="top-burg-menu">
+                <div>
+                    <img src="images/decoria-logo.png" alt="Decoria logo">
+                    <button id="close-burger-menu"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="input">
+                    <img src="images/search02.svg" alt="search icon">
+                    <input type="text" placeholder="Search" id="burger-input" autocomplete="off">
+                </div>
+                <div class="search-results burger-search-results" id="burger-search-results"></div>
+                <nav>
+                    <a href="index.html">Home</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="shop.html" data-nav-product>Product</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact Us</a>
+                </nav>
+            </div>
+            <div class="bottom-burg-menu">
+                <div><h2>Cart</h2><div><img src="images/bag-icon.svg" alt=""><span class="cart-articlesNr">0</span></div></div>
+                <div><h2>Wishlist</h2><div><img src="images/wishlist.svg" alt=""><span class="wishlist-articlesNr">0</span></div></div>
+                <button class="mobile-signin-btn">Sign In</button>
+                <button class="mobile-logout-btn" style="display:none">Log Out</button>
+                <div>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="order-complete-main">
+        <h1 class="cart-page-title">Complete!</h1>
+
+        <!-- Checkout Steps -->
+        <div class="checkout-steps">
+            <div class="step completed">
+                <span class="step-circle completed"><i class="fa-solid fa-check"></i></span>
+                <span class="step-label">Shopping cart</span>
+            </div>
+            <div class="step-line active"></div>
+            <div class="step completed">
+                <span class="step-circle completed"><i class="fa-solid fa-check"></i></span>
+                <span class="step-label">Checkout details</span>
+            </div>
+            <div class="step-line active"></div>
+            <div class="step active">
+                <span class="step-circle active">3</span>
+                <span class="step-label">Order complete</span>
+            </div>
+        </div>
+
+        <!-- Confirmation Card -->
+        <div class="order-confirmation-card">
+            <div class="order-thank-you">
+                <p>Thank you! 🎉</p>
+                <h2>Your order has been received</h2>
+            </div>
+
+            <div class="order-items-preview" id="order-items-preview"></div>
+
+            <div class="order-details-grid">
+                <div class="order-detail-item">
+                    <span class="detail-label">Order code:</span>
+                    <span class="detail-value" id="order-code"></span>
+                </div>
+                <div class="order-detail-item">
+                    <span class="detail-label">Date:</span>
+                    <span class="detail-value" id="order-date"></span>
+                </div>
+                <div class="order-detail-item">
+                    <span class="detail-label">Total:</span>
+                    <span class="detail-value" id="order-total-complete"></span>
+                </div>
+                <div class="order-detail-item">
+                    <span class="detail-label">Payment method:</span>
+                    <span class="detail-value" id="order-payment"></span>
+                </div>
+            </div>
+
+            <a href="shop.html" class="purchase-history-btn">Purchase history</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="top-footer">
+                <div class="left-top-footer">
+                    <img src="images/decoria-logo.png" alt="Decoria logo" class="footer-logo-img">
+                    <div class="footer-divider"></div>
+                    <p class="footer-tagline">Gift & Decoration Store</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="index.html">Home</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="shop.html" data-nav-product>Product</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact Us</a>
+                </nav>
+            </div>
+            <div class="footer-line"></div>
+            <div class="bottom-footer">
+                <div class="left-bottom-footer">
+                    <span>Copyright © 2024 VisioCreate. All rights reserved</span>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+                <div class="right-bottom-footer">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
